@@ -129,8 +129,13 @@ public class MainActivity extends SuperAppCompatActivity {
             animator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationStart(Animator animation) {
-                    fab.setVisibility(View.GONE);
-                    bottomFabBar.setVisibility(View.VISIBLE);
+                    if (fab != null) {
+                        fab.setVisibility(View.GONE);
+                    }
+
+                    if (bottomFabBar != null) {
+                        bottomFabBar.setVisibility(View.VISIBLE);
+                    }
                 }
             });
             animator.start();
@@ -152,8 +157,12 @@ public class MainActivity extends SuperAppCompatActivity {
             animator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    fab.setVisibility(View.VISIBLE);
-                    bottomFabBar.setVisibility(View.INVISIBLE);
+                    if (fab != null) {
+                        fab.setVisibility(View.VISIBLE);
+                    }
+                    if (bottomFabBar != null) {
+                        bottomFabBar.setVisibility(View.INVISIBLE);
+                    }
                 }
             });
             animator.start();
