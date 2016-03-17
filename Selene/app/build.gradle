@@ -2,10 +2,6 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
-
 apply plugin: 'hugo'
 apply plugin: 'realm-android'
 
