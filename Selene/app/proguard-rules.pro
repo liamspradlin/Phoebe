@@ -15,6 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable,*Annotation*,Exceptions
 
 -keep class io.realm.annotations.RealmModule
 -keep @io.realm.annotations.RealmModule class *
