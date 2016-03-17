@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/parent_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dust_note"
+    android:visibility="invisible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                app:contentInsetStart="72dp">
+
+                <liam.franco.selene.ui.FontEditText
+                    android:id="@+id/note_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/untitled"
+                    android:inputType="text|textCapSentences"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@null"
+                    android:textSize="20sp"
+                    android:transitionName="note_title"
+                    app:font="BreeSerif-Regular"/>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <liam.franco.selene.ui.BaselineGridEditText
+                android:id="@+id/note_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="top"
+                android:hint="@string/new_note_hint"
+                android:inputType="textMultiLine|textCapSentences"
+                android:letterSpacing="0.01"
+                android:paddingBottom="56dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp"
+                app:font="OpenSans-Regular"
+                app:lineHeightHint="24dp"/>
+        </ScrollView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/tools_bar_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/tools_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="16dp"
+            android:animateLayoutChanges="true"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="1dp">
+
+            <!-- this padding needs fixing-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/tags_list"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="56dp"
+                android:background="@android:color/transparent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="8dp"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp"
+                android:visibility="gone"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:visibility="visible"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:id="@+id/archive"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/accent_ripple"
+                        android:contentDescription="@null"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_archive"
+                        android:tintMode="src_in"/>
+
+                    <View
+                        android:id="@+id/archive_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/colorAccent"
+                        android:visibility="invisible"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:id="@+id/category"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/accent_ripple"
+                        android:contentDescription="@null"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_palette"
+                        android:tintMode="src_in"/>
+
+                    <View
+                        android:id="@+id/category_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/colorAccent"
+                        android:visibility="invisible"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:id="@+id/reminder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/accent_ripple"
+                        android:contentDescription="@null"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_remind"
+                        android:tintMode="src_in"/>
+
+                    <View
+                        android:id="@+id/reminder_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/colorAccent"
+                        android:visibility="invisible"/>
+                </FrameLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+</FrameLayout>

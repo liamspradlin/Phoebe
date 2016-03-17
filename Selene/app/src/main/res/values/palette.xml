@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#fff</color>
+    <color name="grey_medium">#444444</color>
+    <color name="dust_note">#eeeeee</color>
+    <color name="grey_white">#fafafa</color>
+    <color name="sky">#1e2c5b</color>
+    <color name="sky_light">#233e7f</color>
+    <color name="sky_bright">#3657a7</color>
+    <color name="interior">#006667</color>
+    <color name="interior_light">#009890</color>
+    <color name="interior_bright">#0dc1b8</color>
+    <color name="water">#0064a2</color>
+    <color name="water_light">#0083c9</color>
+    <color name="water_bright">#2ba4e4</color>
+    <color name="wood">#552514</color>
+    <color name="wood_light">#965031</color>
+    <color name="wood_bright">#c16e4a</color>
+    <color name="icon_dark">#000</color>
+    <color name="icon_light">#fff</color>
+</resources>

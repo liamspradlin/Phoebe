@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e5e5e5</color>
+    <color name="colorPrimaryDark">#979797</color>
+    <color name="colorAccent">#0083c9</color>
+    <color name="note_activity_background">#fafafa</color>
+    <color name="note_activity_status_bar">#33000000</color>
+    <color name="note_activity_icon_tint">#99000000</color>
+    <color name="new_note_hint">#979797</color>
+    <color name="note_activity_tools_tint">#fafafa</color>
+    <color name="ripple_light">#99ffffff</color>
+    <color name="ripple_color_accent">#990083c9</color>
+    <color name="transparent_status_bar">#50000000</color>
+    <color name="empty_view_text_color">#f1f1f1</color>
+</resources>

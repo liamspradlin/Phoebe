@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<liam.franco.selene.ui.ForegroundLinearLayout
+    android:id="@+id/parent_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:foreground="@drawable/light_ripple"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingEnd="8dp"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp">
+
+    <liam.franco.selene.ui.BaselineGridTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:transitionName="note_title"
+        app:font="BreeSerif-Regular"
+        app:lineHeightHint="24dp"
+        tools:text="Selene"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <liam.franco.selene.ui.BaselineGridTextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:letterSpacing="0.01"
+        android:maxLines="10"
+        android:textSize="14sp"
+        android:transitionName="note_content"
+        app:font="OpenSans-Regular"
+        app:lineHeightHint="24sp"
+        tools:text="Content message text"/>
+</liam.franco.selene.ui.ForegroundLinearLayout>

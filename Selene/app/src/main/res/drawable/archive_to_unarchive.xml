@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="54dp"
+        android:height="54dp"
+        android:viewportHeight="54"
+        android:viewportWidth="54">
+
+    <path
+        android:name="unarchive"
+        android:fillColor="#000000"
+        android:pathData="M52.6,6.7l-4.2-5c-0.8-1-2-1.7-3.5-1.7H9C7.6,0,6.4,0.6,5.5,1.7l-4.1,5C0.5,7.7,0,9.1,0,10.5V48c0,3.3,2.7,6,6,6h42
+c3.3,0,6-2.7,6-6V10.5C54,9.1,53.5,7.7,52.6,6.7z
+M27,13l16.5,16.5H33v6H21v-6H10.5L27,13z M6.4,6l2.4-3h36l2.8,3H6.4z"/>
+
+    <path
+        android:fillColor="#000000"
+        android:pathData="M52.62,6.69 L48.45,1.65 C47.64,0.63 46.41,0 45,0 L9,0 C7.59,0 6.36,0.63
+5.52,1.65 L1.38,6.69 C0.51,7.71 0,9.06 0,10.5 L0,48 C0,51.3 2.7,54 6,54 L48,54
+C51.3,54 54,51.3 54,48 L54,10.5 C54,9.06 53.49,7.71 52.62,6.69 L52.62,6.69 Z
+M27,43.5 L10.5,27 L21,27 L21,21 L33,21 L33,27 L43.5,27 L27,43.5 L27,43.5 Z
+M6.36,6 L8.79,3 L44.79,3 L47.61,6 L6.36,6 L6.36,6 Z"
+        android:strokeWidth="1"/>
+</vector>

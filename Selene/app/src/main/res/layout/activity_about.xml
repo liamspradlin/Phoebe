@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/parent_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:contentInsetStart="72dp">
+
+            <liam.franco.selene.ui.FontTextView
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:text="@string/about_selene"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                app:font="BreeSerif-Regular"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/scrollable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <liam.franco.selene.ui.BaselineGridTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_title"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                app:font="OpenSans-Regular"
+                app:lineHeightHint="24sp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/sky_light"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp">
+
+                        <liam.franco.selene.ui.CircularImageView
+                            android:id="@+id/liam_icon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_centerVertical="true"
+                            android:background="#d8d8d8"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/liam"/>
+
+                        <liam.franco.selene.ui.FontTextView
+                            android:id="@+id/liam_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/liam_icon"
+                            android:gravity="center_vertical"
+                            android:text="@string/liam_spradlin"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            app:font="BreeSerif-Regular"/>
+
+                        <liam.franco.selene.ui.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_below="@+id/liam_title"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/liam_icon"
+                            android:gravity="center_vertical"
+                            android:text="@string/liam_spradlin_description"
+                            android:textColor="#fff"
+                            android:textSize="12sp"
+                            app:font="OpenSans-Regular"/>
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/liam_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/sky_light"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp">
+
+                        <liam.franco.selene.ui.CircularImageView
+                            android:id="@+id/francisco_icon"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_centerVertical="true"
+                            android:background="#d8d8d8"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/francisco"/>
+
+                        <liam.franco.selene.ui.FontTextView
+                            android:id="@+id/francisco_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/francisco_icon"
+                            android:gravity="center_vertical"
+                            android:text="@string/francisco_franco"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            app:font="BreeSerif-Regular"/>
+
+                        <liam.franco.selene.ui.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_below="@+id/francisco_title"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/francisco_icon"
+                            android:gravity="center_vertical"
+                            android:text="@string/francisco_franco_description"
+                            android:textColor="#fff"
+                            android:textSize="12sp"
+                            app:font="OpenSans-Regular"/>
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/francisco_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <liam.franco.selene.ui.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="0dp"
+                android:paddingStart="66dp"
+                android:text="@string/links"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                app:font="BreeSerif-Regular"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/sky_light"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <liam.franco.selene.ui.FontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="64dp"
+                        android:text="@string/libraries"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        app:font="BreeSerif-Regular"/>
+
+                    <liam.franco.selene.ui.FontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="64dp"
+                        android:text="@string/libraries_description"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        app:font="OpenSans-Regular"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/libs_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <liam.franco.selene.ui.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="0dp"
+                android:paddingStart="66dp"
+                android:text="@string/mutate_more"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                app:font="BreeSerif-Regular"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/sky_light"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <liam.franco.selene.ui.FontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="64dp"
+                        android:text="@string/mutate_more_title"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        app:font="BreeSerif-Regular"/>
+
+                    <liam.franco.selene.ui.FontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="64dp"
+                        android:text="@string/mutate_more_description"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        app:font="OpenSans-Regular"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/mutate_more_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
