@@ -77,7 +77,7 @@ public class GaiaUtils {
         Color.RGBToHSV(red, green, blue, hsv);
 
         // 'magic' algorithm
-        float div = Float.valueOf(String.format(Locale.getDefault(), "%.2f",
+        float div = Float.valueOf(String.format(Locale.US, "%.2f",
                 sensor.getLight() / ((int) SensorManager.LIGHT_OVERCAST >> 1)));
 
         if (div > HIGH_THRESHOLD) {
