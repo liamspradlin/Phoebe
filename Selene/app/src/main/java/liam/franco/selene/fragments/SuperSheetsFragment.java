@@ -50,6 +50,7 @@ import liam.franco.selene.bus.NoteDeleted;
 import liam.franco.selene.bus.NoteUpdatingEvent;
 import liam.franco.selene.modules.Note;
 import liam.franco.selene.ui.NoteItem;
+import liam.franco.selene.utils.GaiaUtils;
 import liam.franco.selene.utils.RecyclerViewUtils;
 
 public class SuperSheetsFragment extends Fragment {
@@ -178,6 +179,14 @@ public class SuperSheetsFragment extends Fragment {
             if (note.getDeletedNote().getUid() ==
                     getAdapter().getAdapterItem(i).getViewHolder().getNote().getUid()) {
                 getAdapter().remove(i);
+
+                // we gotta clean this note from Gaia otherwise it'll create havoc
+                // not super pretty looking code, but gets the job done!
+                String noteTitle = note.getDeletedNote().getTitle();
+                GaiaUtils.seekAndDestroy(noteTitle + "_" + GaiaUtils.NOTE_PARENT_LAYOUT);
+                GaiaUtils.seekAndDestroy(noteTitle + "_" + GaiaUtils.NOTE_TITLE);
+                GaiaUtils.seekAndDestroy(noteTitle + "_" + GaiaUtils.NOTE_CONTENT);
+
                 App.REALM.beginTransaction();
                 note.getDeletedNote().removeFromRealm();
                 App.REALM.commitTransaction();
