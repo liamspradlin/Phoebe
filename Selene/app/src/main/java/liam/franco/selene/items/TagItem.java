@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liam.franco.selene.R;
 import liam.franco.selene.application.App;
-import liam.franco.selene.eventbus.TagClicked;
+import liam.franco.selene.bus.TagClicked;
 import liam.franco.selene.utils.Palette;
 
 public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
