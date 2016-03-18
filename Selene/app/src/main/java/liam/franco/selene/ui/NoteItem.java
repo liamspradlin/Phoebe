@@ -158,7 +158,7 @@ public class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
 
         @Subscribe
         public void onNoteUpdated(NoteUpdated updatedNote) {
-            if (note.getUid() == updatedNote.getEditedNote().getUid()) {
+            if (note != null && note.isValid() && note.getUid() == updatedNote.getEditedNote().getUid()) {
                 setNote(updatedNote.getEditedNote());
                 parentLayout.setBackgroundColor(getPalette().getPrimary());
                 title.setText(getNote().getTitle());
