@@ -16,6 +16,7 @@
 
 package liam.franco.selene.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -129,21 +131,44 @@ public class AboutActivity extends AppCompatActivity {
 
         liamList.addItemDecoration(new SimpleDividerItemDecoration(this));
         liamAdapter = new FastItemAdapter<>();
+        liamList.setLayoutManager(new UnscrollableLinearLayoutManager(this));
         liamList.setAdapter(liamAdapter);
 
         franciscoList.addItemDecoration(new SimpleDividerItemDecoration(this));
         franciscoAdapter = new FastItemAdapter<>();
+        franciscoList.setLayoutManager(new UnscrollableLinearLayoutManager(this));
         franciscoList.setAdapter(franciscoAdapter);
 
         libsList.addItemDecoration(new SimpleDividerItemDecoration(this));
         libsAdapter = new FastItemAdapter<>();
+        libsList.setLayoutManager(new UnscrollableLinearLayoutManager(this));
         libsList.setAdapter(libsAdapter);
 
         mutateMoreList.addItemDecoration(new SimpleDividerItemDecoration(this));
         mutateMoreAdapter = new FastItemAdapter<>();
+        mutateMoreList.setLayoutManager(new UnscrollableLinearLayoutManager(this));
         mutateMoreList.setAdapter(mutateMoreAdapter);
 
         initAboutEntries();
+    }
+
+    // with RecyclerViews using wrap_content height if the parent is a NestedScrollView (this doesn't even work with a
+    // normal ScrollView) fling doesn't work when you're touching in the RecyclerView area. This hack goes around
+    // the problem. Bug tracker: https://goo.gl/kpLjnI
+    private static class UnscrollableLinearLayoutManager extends LinearLayoutManager {
+        public UnscrollableLinearLayoutManager(Context context) {
+            super(context, LinearLayoutManager.VERTICAL, false);
+        }
+
+        @Override
+        public boolean canScrollHorizontally() {
+            return false;
+        }
+
+        @Override
+        public boolean canScrollVertically() {
+            return false;
+        }
     }
 
     // might look a bit cumbersome laying it out like this but it's just personal preference instead of just starting
