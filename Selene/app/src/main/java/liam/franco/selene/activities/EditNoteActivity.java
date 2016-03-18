@@ -19,7 +19,6 @@ package liam.franco.selene.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -117,7 +116,7 @@ public class EditNoteActivity extends SuperNoteActivity {
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, textToShare);
                 sendIntent.setType("text/plain");
-                startActivity(sendIntent);
+                startActivity(Intent.createChooser(sendIntent, App.CONTEXT.getString(R.string.intent_chooser_title)));
                 break;
         }
 

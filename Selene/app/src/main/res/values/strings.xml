@@ -73,4 +73,5 @@
     <string name="reminder">reminder</string>
     <string name="plaid">plaid</string>
     <string name="url_plaid">https://github.com/nickbutcher/plaid</string>
+    <string name="intent_chooser_title">Share your note</string>
 </resources>
