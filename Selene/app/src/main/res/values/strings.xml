@@ -7,9 +7,8 @@
     <string name="delete">Delete</string>
     <string name="attach_an_image">Attach an image</string>
     <string name="share">Share</string>
-    <string name="note_text_placeholder">In Greek mythology, Selene is the goddess of the moon.\n\nShe is the daughter of the Titans Hyperion and Theia, and sister of the sun-god Helios, and Eos, goddess of the dawn. She drives her moon chariot across the heavens.\n\nSeveral lovers are attributed to her various myths, including Zeus, Pan, and the mortal Endymion. In classical times, Selene was often identified with Artemis, much as her brother, Helios, was identified with Apollo. Both Selene and Artemis were also associated with Hecate, and all three were regarded as lunar goddesses, although only Selene was regarded as the personification of the moon itself. Her Roman equivalent is Luna.\n\nThe etymology of Selene is uncertain, but the  name is of Greek origin, it is likely connected to the word selas meaning “light.”</string>
-    <string name="new_note_hint">Start writing…</string>
-    <string name="untitled">Untitled</string>
+    <string name="new_note_hint">Note</string>
+    <string name="untitled">Title</string>
     <string name="default_palette">default</string>
     <string name="sky_palette">sky</string>
     <string name="sky_light_palette">sky light</string>
