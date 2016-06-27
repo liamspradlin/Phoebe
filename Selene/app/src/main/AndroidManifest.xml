@@ -11,21 +11,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:vmSafeMode="true">
+
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.NewNoteActivity"
-            android:theme="@style/AppTheme.NewNote"/>
+            android:theme="@style/AppTheme.Note"/>
+
         <activity
             android:name=".activities.EditNoteActivity"
-            android:theme="@style/AppTheme.NewNote"/>
-        <activity android:name=".activities.AboutActivity"/>
-    </application>
+            android:theme="@style/AppTheme.Note"/>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+        <activity
+            android:name=".activities.AboutActivity"
+            android:theme="@style/AppTheme.About"/>
+    </application>
 </manifest>
