@@ -26,7 +26,7 @@ import com.mikepenz.fastadapter.IClickable;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import liam.franco.selene.R;
 import liam.franco.selene.application.App;
@@ -82,7 +82,7 @@ public class AboutItem extends AbstractItem<AboutItem, AboutItem.ViewHolder> imp
     }
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         protected TextView title;
 
         public ViewHolder(View view) {

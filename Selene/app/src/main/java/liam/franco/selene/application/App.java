@@ -27,6 +27,7 @@ import java.util.List;
 
 import de.halfbit.tinybus.TinyBus;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import liam.franco.selene.modules.AmbientLight;
 import liam.franco.selene.modules.Gaia;
 
@@ -51,8 +52,7 @@ public class App extends Application {
         CONTEXT = this;
         RESOURCES = getResources();
         MAIN_THREAD = new Handler(getMainLooper());
-        // getInstance() was deprecated on Realm 0.88.0, should be eventually migrated to use the newer API
-        REALM = Realm.getInstance(this);
+        REALM = Realm.getInstance(new RealmConfiguration.Builder(this).build());
         BUS = TinyBus.from(this);
         SENSOR_AMBIENT_LIGHT = new AmbientLight();
         GAIAS = new ArrayList<>();

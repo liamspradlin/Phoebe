@@ -15,36 +15,29 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent">
+            android:background="@android:color/transparent"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            app:contentInsetStart="72dp">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <liam.franco.selene.ui.FontEditText
+                android:id="@+id/note_title"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                app:contentInsetStart="72dp">
-
-                <liam.franco.selene.ui.FontEditText
-                    android:id="@+id/note_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
-                    android:gravity="center_vertical"
-                    android:hint="@string/untitled"
-                    android:inputType="text|textCapSentences"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:textCursorDrawable="@null"
-                    android:textSize="20sp"
-                    app:font="BreeSerif-Regular"/>
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
+                android:gravity="center_vertical"
+                android:hint="@string/untitled"
+                android:inputType="text|textCapSentences"
+                android:maxLength="25"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"
+                android:textSize="20sp"
+                app:font="BreeSerif-Regular"/>
+        </android.support.v7.widget.Toolbar>
 
         <ScrollView
             android:layout_width="match_parent"

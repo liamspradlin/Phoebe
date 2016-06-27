@@ -21,13 +21,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -41,7 +39,7 @@ import android.widget.TextView;
 
 import com.mikepenz.materialize.util.UIUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.halfbit.tinybus.Subscribe;
@@ -63,21 +61,19 @@ public class MainActivity extends SuperAppCompatActivity {
     public static final String PRESENT = App.CONTEXT.getString(R.string.present);
     public static final String FUTURE = App.CONTEXT.getString(R.string.future);
 
-    @Bind(R.id.parent_layout)
+    @BindView(R.id.parent_layout)
     protected FrameLayout parentLayout;
-    @Bind(R.id.appbar)
-    protected AppBarLayout appBarLayout;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
-    @Bind(R.id.tablayout)
+    @BindView(R.id.tablayout)
     protected TabLayout tabLayout;
-    @Bind(R.id.viewpager)
+    @BindView(R.id.viewpager)
     protected ViewPager viewPager;
-    @Bind(R.id.try_writing_a_note)
+    @BindView(R.id.try_writing_a_note)
     protected TextView tryWritingAnote;
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     protected FloatingActionButton fab;
-    @Bind(R.id.bottom_fab_bar)
+    @BindView(R.id.bottom_fab_bar)
     protected FrameLayout bottomFabBar;
 
     private static String[] tabs;
@@ -98,8 +94,6 @@ public class MainActivity extends SuperAppCompatActivity {
         App.BUS.register(this);
 
         setSupportActionBar(toolbar);
-
-        ViewCompat.setElevation(appBarLayout, 0f);
 
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(fragmentPagerAdapter);
@@ -286,7 +280,6 @@ public class MainActivity extends SuperAppCompatActivity {
     @Override
     protected void onDestroy() {
         App.BUS.unregister(this);
-        ButterKnife.unbind(this);
         super.onDestroy();
     }
 }

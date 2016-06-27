@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liam.franco.selene.R;
@@ -53,7 +53,7 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
     }
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tag)
+        @BindView(R.id.tag)
         protected ImageView tag;
 
         public ViewHolder(View view) {

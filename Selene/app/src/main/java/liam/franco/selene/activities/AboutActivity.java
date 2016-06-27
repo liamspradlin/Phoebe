@@ -22,9 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,7 +36,7 @@ import android.widget.LinearLayout;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.materialize.util.UIUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.halfbit.tinybus.Subscribe;
 import liam.franco.selene.R;
@@ -55,21 +53,19 @@ public class AboutActivity extends AppCompatActivity {
     private final static String TWITTER_PACKAGE = "com.twitter.android";
     private final static String PLAY_STORE_PACKAGE = "com.android.vending";
 
-    @Bind(R.id.parent_layout)
+    @BindView(R.id.parent_layout)
     protected LinearLayout parentLayout;
-    @Bind(R.id.appbar)
-    protected AppBarLayout appBar;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
-    @Bind(R.id.scrollable_layout)
+    @BindView(R.id.scrollable_layout)
     protected LinearLayout scrollableLayout;
-    @Bind(R.id.liam_list)
+    @BindView(R.id.liam_list)
     protected RecyclerView liamList;
-    @Bind(R.id.francisco_list)
+    @BindView(R.id.francisco_list)
     protected RecyclerView franciscoList;
-    @Bind(R.id.libs_list)
+    @BindView(R.id.libs_list)
     protected RecyclerView libsList;
-    @Bind(R.id.mutate_more_list)
+    @BindView(R.id.mutate_more_list)
     protected RecyclerView mutateMoreList;
 
     private FastItemAdapter<AboutItem> liamAdapter;
@@ -94,8 +90,6 @@ public class AboutActivity extends AppCompatActivity {
         UIUtils.setTranslucentNavigationFlag(this, true);
         UIUtils.setTranslucentStatusFlag(this, true);
 
-        ViewCompat.setElevation(appBar, 0f);
-
         parentLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
@@ -108,10 +102,10 @@ public class AboutActivity extends AppCompatActivity {
                 // 1 = portrait, 2 = landscape
                 int orientation = App.RESOURCES.getConfiguration().orientation;
 
-                ViewGroup.MarginLayoutParams toolbar = (ViewGroup.MarginLayoutParams) appBar.getLayoutParams();
-                toolbar.topMargin += insets.getSystemWindowInsetTop();
-                toolbar.rightMargin += insets.getSystemWindowInsetRight();
-                appBar.setLayoutParams(toolbar);
+                ViewGroup.MarginLayoutParams bar = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
+                bar.topMargin += insets.getSystemWindowInsetTop();
+                bar.rightMargin += insets.getSystemWindowInsetRight();
+                toolbar.setLayoutParams(bar);
 
                 // making sure it's all inside bounds because of our transparent status and nav bars
                 scrollableLayout.setPadding(scrollableLayout.getPaddingLeft(),
@@ -324,7 +318,6 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         App.BUS.unregister(this);
-        ButterKnife.unbind(this);
         super.onDestroy();
     }
 }

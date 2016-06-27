@@ -31,7 +31,6 @@ import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
 import icepick.State;
 import liam.franco.selene.R;
 import liam.franco.selene.application.App;
@@ -219,7 +218,6 @@ public class NewNoteActivity extends SuperNoteActivity {
         }
 
         App.BUS.unregister(this);
-        ButterKnife.unbind(this);
         super.onDestroy();
     }
 }

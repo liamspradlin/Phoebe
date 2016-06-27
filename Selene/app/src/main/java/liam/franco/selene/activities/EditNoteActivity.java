@@ -24,7 +24,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import butterknife.ButterKnife;
 import icepick.State;
 import liam.franco.selene.R;
 import liam.franco.selene.application.App;
@@ -148,7 +147,6 @@ public class EditNoteActivity extends SuperNoteActivity {
         }
 
         App.BUS.unregister(this);
-        ButterKnife.unbind(this);
         super.onDestroy();
     }
 }

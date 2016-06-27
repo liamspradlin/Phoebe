@@ -36,8 +36,9 @@ import com.mikepenz.materialize.util.UIUtils;
 
 import java.util.Collections;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import de.halfbit.tinybus.Subscribe;
 import liam.franco.selene.R;
 import liam.franco.selene.activities.EditNoteActivity;
@@ -47,18 +48,17 @@ import liam.franco.selene.bus.Future;
 import liam.franco.selene.bus.MoveNoteToFrontRow;
 import liam.franco.selene.bus.NewNoteSaved;
 import liam.franco.selene.bus.NotesCount;
-import liam.franco.selene.bus.Past;
 import liam.franco.selene.bus.Present;
 import liam.franco.selene.modules.Note;
 import liam.franco.selene.ui.NoteItem;
 import liam.franco.selene.utils.RecyclerViewUtils;
 
 public class SuperNotesFragment extends Fragment {
-    @Bind(R.id.parent_layout)
+    @BindView(R.id.parent_layout)
     protected FrameLayout parentLayout;
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
-    @Bind(R.id.empty_view)
+    @BindView(R.id.empty_view)
     protected LinearLayout emptyView;
 
     @LayoutRes
@@ -66,13 +66,14 @@ public class SuperNotesFragment extends Fragment {
 
     private FastItemAdapter<NoteItem> adapter;
     private String tabTitle;
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(resId, container, false);
-        ButterKnife.bind(this, layout);
+        unbinder = ButterKnife.bind(this, layout);
         App.BUS.register(this);
 
         adapter = new FastItemAdapter<>();
@@ -195,7 +196,7 @@ public class SuperNotesFragment extends Fragment {
     @Override
     public void onDestroyView() {
         App.BUS.unregister(this);
-        ButterKnife.unbind(this);
         super.onDestroyView();
+        unbinder.unbind();
     }
 }

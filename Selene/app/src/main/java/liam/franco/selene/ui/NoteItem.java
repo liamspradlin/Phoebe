@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.halfbit.tinybus.Subscribe;
 import liam.franco.selene.R;
@@ -110,11 +110,11 @@ public class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.parent_layout)
+        @BindView(R.id.parent_layout)
         protected ForegroundLinearLayout parentLayout;
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         protected TextView title;
-        @Bind(R.id.content)
+        @BindView(R.id.content)
         protected TextView content;
 
         protected Note note;

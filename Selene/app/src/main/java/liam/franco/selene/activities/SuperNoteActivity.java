@@ -18,8 +18,6 @@ package liam.franco.selene.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -37,7 +35,7 @@ import com.mikepenz.materialize.util.UIUtils;
 
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
@@ -54,33 +52,31 @@ import liam.franco.selene.utils.Palette;
 import liam.franco.selene.utils.PaletteUtils;
 
 public class SuperNoteActivity extends AppCompatActivity {
-    @Bind(R.id.appbar)
-    protected AppBarLayout appBarLayout;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
-    @Bind(R.id.parent_layout)
+    @BindView(R.id.parent_layout)
     protected FrameLayout parentLayout;
-    @Bind(R.id.note_title)
+    @BindView(R.id.note_title)
     protected EditText noteTitle;
-    @Bind(R.id.note_content)
+    @BindView(R.id.note_content)
     protected EditText noteContent;
-    @Bind(R.id.tools_bar_parent)
+    @BindView(R.id.tools_bar_parent)
     protected FrameLayout toolsBarParent;
-    @Bind(R.id.tools_bar)
+    @BindView(R.id.tools_bar)
     protected CardView toolsBar;
-    @Bind(R.id.archive)
+    @BindView(R.id.archive)
     protected ImageView archive;
-    @Bind(R.id.category)
+    @BindView(R.id.category)
     protected ImageView category;
-    @Bind(R.id.reminder)
+    @BindView(R.id.reminder)
     protected ImageView reminder;
-    @Bind(R.id.archive_indicator)
+    @BindView(R.id.archive_indicator)
     protected View archiveIndicator;
-    @Bind(R.id.category_indicator)
+    @BindView(R.id.category_indicator)
     protected View categoryIndicator;
-    @Bind(R.id.reminder_indicator)
+    @BindView(R.id.reminder_indicator)
     protected View reminderIndicator;
-    @Bind(R.id.tags_list)
+    @BindView(R.id.tags_list)
     protected RecyclerView tagsList;
 
     protected Palette currentPalette;
@@ -102,8 +98,6 @@ public class SuperNoteActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        ViewCompat.setElevation(appBarLayout, 0f);
-
         parentLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
@@ -116,11 +110,10 @@ public class SuperNoteActivity extends AppCompatActivity {
                 // 1 = portrait, 2 = landscape
                 int orientation = App.RESOURCES.getConfiguration().orientation;
 
-                ViewGroup.MarginLayoutParams toolbar = (ViewGroup.MarginLayoutParams) appBarLayout
-                        .getLayoutParams();
-                toolbar.topMargin += insets.getSystemWindowInsetTop();
-                toolbar.rightMargin += insets.getSystemWindowInsetRight();
-                appBarLayout.setLayoutParams(toolbar);
+                ViewGroup.MarginLayoutParams bar = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
+                bar.topMargin += insets.getSystemWindowInsetTop();
+                bar.rightMargin += insets.getSystemWindowInsetRight();
+                toolbar.setLayoutParams(bar);
 
                 toolsBarParent.setPadding(toolsBarParent.getPaddingLeft(),
                         toolsBarParent.getPaddingTop(),

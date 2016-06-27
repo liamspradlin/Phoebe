@@ -7,30 +7,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        app:contentInsetStart="72dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <liam.franco.selene.ui.FontTextView
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
-            app:contentInsetStart="72dp">
-
-            <liam.franco.selene.ui.FontTextView
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                android:gravity="center_vertical"
-                android:text="@string/about_selene"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                app:font="BreeSerif-Regular"/>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+            android:gravity="center_vertical"
+            android:text="@string/about_selene"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:font="BreeSerif-Regular"/>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -26,7 +26,7 @@ import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import liam.franco.selene.R;
 import liam.franco.selene.application.App;
@@ -77,7 +77,7 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
     }
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tag)
+        @BindView(R.id.tag)
         protected ImageView tag;
 
         public ViewHolder(View view) {
