@@ -35,7 +35,10 @@ import butterknife.ButterKnife;
 import icepick.State;
 import liam.franco.selene.R;
 import liam.franco.selene.application.App;
+import liam.franco.selene.bus.Future;
 import liam.franco.selene.bus.NewNoteSaved;
+import liam.franco.selene.bus.Past;
+import liam.franco.selene.bus.Present;
 import liam.franco.selene.modules.Note;
 import liam.franco.selene.utils.PaletteUtils;
 import liam.franco.selene.utils.RandomUtils;
@@ -205,6 +208,14 @@ public class NewNoteActivity extends SuperNoteActivity {
             App.REALM.commitTransaction();
 
             App.BUS.post(new NewNoteSaved(note));
+
+            if (isArchive) {
+                App.BUS.post(new Past());
+            } else if (isReminder) {
+                App.BUS.post(new Future());
+            } else {
+                App.BUS.post(new Present());
+            }
         }
 
         App.BUS.unregister(this);

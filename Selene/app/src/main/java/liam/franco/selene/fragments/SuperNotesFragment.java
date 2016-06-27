@@ -1,3 +1,19 @@
+/*
+ * Copyright 2016 Francisco Franco & Liam Spradlin
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package liam.franco.selene.fragments;
 
 import android.animation.ValueAnimator;
@@ -26,11 +42,13 @@ import de.halfbit.tinybus.Subscribe;
 import liam.franco.selene.R;
 import liam.franco.selene.activities.EditNoteActivity;
 import liam.franco.selene.activities.MainActivity;
-import liam.franco.selene.activities.NewNoteActivity;
 import liam.franco.selene.application.App;
+import liam.franco.selene.bus.Future;
 import liam.franco.selene.bus.MoveNoteToFrontRow;
 import liam.franco.selene.bus.NewNoteSaved;
 import liam.franco.selene.bus.NotesCount;
+import liam.franco.selene.bus.Past;
+import liam.franco.selene.bus.Present;
 import liam.franco.selene.modules.Note;
 import liam.franco.selene.ui.NoteItem;
 import liam.franco.selene.utils.RecyclerViewUtils;
@@ -121,11 +139,13 @@ public class SuperNotesFragment extends Fragment {
         } else if (newNote.getNote().getReminder()) {
             if (getTabTitle().equals(MainActivity.FUTURE)) {
                 addNote(newNote.getNote());
+                App.BUS.post(new Future());
             }
 
         } else {
             if (getTabTitle().equals(MainActivity.PRESENT)) {
                 addNote(newNote.getNote());
+                App.BUS.post(new Present());
             }
         }
 

@@ -18,6 +18,7 @@ package liam.franco.selene.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -43,8 +44,12 @@ import com.mikepenz.materialize.util.UIUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.halfbit.tinybus.Subscribe;
 import liam.franco.selene.R;
 import liam.franco.selene.application.App;
+import liam.franco.selene.bus.Future;
+import liam.franco.selene.bus.Past;
+import liam.franco.selene.bus.Present;
 import liam.franco.selene.fragments.FutureFragment;
 import liam.franco.selene.fragments.PastFragment;
 import liam.franco.selene.fragments.PresentFragment;
@@ -90,6 +95,7 @@ public class MainActivity extends SuperAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        App.BUS.register(this);
 
         setSupportActionBar(toolbar);
 
@@ -195,6 +201,21 @@ public class MainActivity extends SuperAppCompatActivity {
         }
     };
 
+    @Subscribe
+    public void onPast(Past past) {
+        viewPager.setCurrentItem(0);
+    }
+
+    @Subscribe
+    public void onPresent(Present present) {
+        viewPager.setCurrentItem(1);
+    }
+
+    @Subscribe
+    public void onFuture(Future future) {
+        viewPager.setCurrentItem(2);
+    }
+
     @OnClick({R.id.fab, R.id.bottom_fab_bar})
     protected void onFabClick(final View newNoteView) {
         Intent newNote = new Intent(this, NewNoteActivity.class);
@@ -222,7 +243,8 @@ public class MainActivity extends SuperAppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.about:
-                startActivity(new Intent(this, AboutActivity.class));
+                startActivity(new Intent(this, AboutActivity.class),
+                        ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 break;
         }
 
@@ -263,6 +285,7 @@ public class MainActivity extends SuperAppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        App.BUS.unregister(this);
         ButterKnife.unbind(this);
         super.onDestroy();
     }

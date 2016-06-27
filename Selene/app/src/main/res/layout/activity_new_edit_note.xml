@@ -62,7 +62,7 @@
                 android:hint="@string/new_note_hint"
                 android:inputType="textMultiLine|textCapSentences"
                 android:letterSpacing="0.01"
-                android:paddingBottom="56dp"
+                android:paddingBottom="72dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="16dp"
