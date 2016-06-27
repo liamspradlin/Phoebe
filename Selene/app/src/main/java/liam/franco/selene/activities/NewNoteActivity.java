@@ -39,6 +39,7 @@ import liam.franco.selene.bus.NewNoteSaved;
 import liam.franco.selene.bus.Past;
 import liam.franco.selene.bus.Present;
 import liam.franco.selene.modules.Note;
+import liam.franco.selene.utils.AnimUtils;
 import liam.franco.selene.utils.PaletteUtils;
 import liam.franco.selene.utils.RandomUtils;
 
@@ -102,7 +103,8 @@ public class NewNoteActivity extends SuperNoteActivity {
 
         // create the animator for this view (the start radius is zero)
         startRevealAnim = ViewAnimationUtils.createCircularReveal(parentLayout, fabX, fabY, 0, finalRadius);
-        startRevealAnim.setDuration(400);
+        startRevealAnim.setDuration(750);
+        startRevealAnim.setInterpolator(AnimUtils.getFastOutSlowInInterpolator());
         startRevealAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -163,7 +165,8 @@ public class NewNoteActivity extends SuperNoteActivity {
                     int endRadius = 0;
 
                     Animator animate = ViewAnimationUtils.createCircularReveal(parentLayout, fabX, fabY, startRadius, endRadius);
-                    animate.setDuration(400);
+                    animate.setDuration(750);
+                    animate.setInterpolator(AnimUtils.getFastOutSlowInInterpolator());
                     animate.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
