@@ -18,7 +18,6 @@ package liam.franco.selene.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -94,8 +93,6 @@ public class AboutActivity extends AppCompatActivity {
 
         UIUtils.setTranslucentNavigationFlag(this, true);
         UIUtils.setTranslucentStatusFlag(this, true);
-
-        getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(App.CONTEXT, R.color.sky)));
 
         ViewCompat.setElevation(appBar, 0f);
 
