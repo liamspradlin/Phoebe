@@ -199,9 +199,8 @@ public class NewNoteActivity extends SuperNoteActivity {
             boolean isReminder = reminder.isSelected();
 
             App.REALM.beginTransaction();
-            Note note = App.REALM.createObject(Note.class);
+            Note note = App.REALM.createObject(Note.class, RandomUtils.getNewLong());
             note.setDate(System.currentTimeMillis());
-            note.setUid(RandomUtils.getNewLong());
             note.setTitle(title);
             note.setContent(content);
             note.setPalette(palette);

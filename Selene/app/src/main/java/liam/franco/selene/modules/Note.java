@@ -68,10 +68,6 @@ public class Note extends RealmObject {
         return uid;
     }
 
-    public void setUid(long uid) {
-        this.uid = uid;
-    }
-
     public boolean getArchive() {
         return archive;
     }
