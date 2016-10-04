@@ -26,6 +26,8 @@ import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liam.franco.selene.R;
@@ -41,7 +43,7 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
         this.palette = palette;
     }
 
-    protected static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+    private static class ItemFactory implements ViewHolderFactory<ViewHolder> {
         public ViewHolder create(View v) {
             return new ViewHolder(v);
         }
@@ -63,8 +65,8 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
     }
 
     @Override
-    public void bindView(ViewHolder viewHolder) {
-        super.bindView(viewHolder);
+    public void bindView(ViewHolder viewHolder, List payloads) {
+        super.bindView(viewHolder, payloads);
 
         viewHolder.tag.setImageTintList(ColorStateList.valueOf(palette.getPrimary()));
         withOnItemClickListener(new FastAdapter.OnClickListener<TagItem>() {
@@ -78,7 +80,7 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tag)
-        protected ImageView tag;
+        ImageView tag;
 
         public ViewHolder(View view) {
             super(view);

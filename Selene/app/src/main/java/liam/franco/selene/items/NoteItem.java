@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liam.franco.selene.R;
@@ -17,7 +19,7 @@ import liam.franco.selene.modules.Note;
 import liam.franco.selene.utils.Palette;
 import liam.franco.selene.utils.PaletteUtils;
 
-public class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
+class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
     private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
     private Note note;
 
@@ -25,7 +27,7 @@ public class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
         this.note = note;
     }
 
-    protected static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+    private static class ItemFactory implements ViewHolderFactory<ViewHolder> {
         public ViewHolder create(View v) {
             return new ViewHolder(v);
         }
@@ -47,8 +49,9 @@ public class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
     }
 
     @Override
-    public void bindView(final ViewHolder viewHolder) {
-        super.bindView(viewHolder);
+    public void bindView(ViewHolder viewHolder, List payloads) {
+        super.bindView(viewHolder, payloads);
+
         viewHolder.setNote(getNote());
         setUi(viewHolder, getNote());
     }

@@ -26,6 +26,8 @@ import com.mikepenz.fastadapter.IClickable;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liam.franco.selene.R;
@@ -41,7 +43,7 @@ public class AboutItem extends AbstractItem<AboutItem, AboutItem.ViewHolder> imp
         this.about = about;
     }
 
-    protected static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+    private static class ItemFactory implements ViewHolderFactory<ViewHolder> {
         public ViewHolder create(View v) {
             return new ViewHolder(v);
         }
@@ -67,8 +69,8 @@ public class AboutItem extends AbstractItem<AboutItem, AboutItem.ViewHolder> imp
     }
 
     @Override
-    public void bindView(ViewHolder viewHolder) {
-        super.bindView(viewHolder);
+    public void bindView(ViewHolder viewHolder, List payloads) {
+        super.bindView(viewHolder, payloads);
 
         viewHolder.title.setText(getAbout().getTitle());
 

@@ -24,6 +24,8 @@ import android.widget.TextView;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.halfbit.tinybus.Subscribe;
@@ -46,7 +48,7 @@ public class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
         this.note = note;
     }
 
-    protected static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+    private static class ItemFactory implements ViewHolderFactory<ViewHolder> {
         public ViewHolder create(View v) {
             return new ViewHolder(v);
         }
@@ -80,8 +82,9 @@ public class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
     }
 
     @Override
-    public void bindView(final ViewHolder viewHolder) {
-        super.bindView(viewHolder);
+    public void bindView(ViewHolder viewHolder, List payloads) {
+        super.bindView(viewHolder, payloads);
+
         viewHolder.setNote(getNote());
         setViewHolder(viewHolder);
         setUi(viewHolder);

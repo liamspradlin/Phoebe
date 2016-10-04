@@ -22,12 +22,13 @@ import android.content.res.Resources;
 import android.os.Handler;
 import android.util.Log;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import de.halfbit.tinybus.TinyBus;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import liam.franco.selene.modules.AmbientLight;
 import liam.franco.selene.modules.Gaia;
 
@@ -35,10 +36,10 @@ public class App extends Application {
     public static Context CONTEXT;
     public static Resources RESOURCES;
     public static Handler MAIN_THREAD;
-    public static Realm REALM;
     public static TinyBus BUS;
     public static AmbientLight SENSOR_AMBIENT_LIGHT;
     public static List<Gaia> GAIAS;
+    public static Realm REALM;
 
     public static void LOG(Object msg) {
         do {
@@ -49,12 +50,18 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
+        Realm.init(this);
+
         CONTEXT = this;
         RESOURCES = getResources();
         MAIN_THREAD = new Handler(getMainLooper());
-        REALM = Realm.getInstance(new RealmConfiguration.Builder(this).build());
         BUS = TinyBus.from(this);
         SENSOR_AMBIENT_LIGHT = new AmbientLight();
         GAIAS = new ArrayList<>();
+        REALM = Realm.getDefaultInstance();
     }
 }

@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -15,7 +17,7 @@ import liam.franco.selene.application.App;
 import liam.franco.selene.bus.TagClicked;
 import liam.franco.selene.utils.Palette;
 
-public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
+class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
     private final ViewHolderFactory<? extends ViewHolder> FACTORY = new ItemFactory();
     public Palette palette;
 
@@ -23,7 +25,7 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
         this.palette = palette;
     }
 
-    protected static class ItemFactory implements ViewHolderFactory<ViewHolder> {
+    private static class ItemFactory implements ViewHolderFactory<ViewHolder> {
         public ViewHolder create(View v) {
             return new ViewHolder(v);
         }
@@ -45,8 +47,8 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
     }
 
     @Override
-    public void bindView(ViewHolder viewHolder) {
-        super.bindView(viewHolder);
+    public void bindView(ViewHolder viewHolder, List payloads) {
+        super.bindView(viewHolder, payloads);
 
         viewHolder.tag.getBackground().setTint(palette.getPrimary());
         viewHolder.tag.setTag(palette.getName());
@@ -54,7 +56,7 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tag)
-        protected ImageView tag;
+        ImageView tag;
 
         public ViewHolder(View view) {
             super(view);
@@ -62,7 +64,7 @@ public class TagItem extends AbstractItem<TagItem, TagItem.ViewHolder> {
         }
 
         @OnClick(R.id.tag)
-        public void onTagClick(ImageView tag) {
+        void onTagClick(ImageView tag) {
             App.BUS.post(new TagClicked((String) tag.getTag()));
         }
     }
