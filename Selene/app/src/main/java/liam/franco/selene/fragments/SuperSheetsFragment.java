@@ -201,6 +201,14 @@ public class SuperSheetsFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        for (int i = 0; i < getAdapter().getAdapterItemCount(); i++) {
+            NoteItem noteItem = getAdapter().getItem(i);
+
+            if (App.BUS.hasRegistered(noteItem.getViewHolder())) {
+                App.BUS.unregister(noteItem.getViewHolder());
+            }
+        }
+
         App.BUS.unregister(this);
         super.onDestroyView();
         unbinder.unbind();
