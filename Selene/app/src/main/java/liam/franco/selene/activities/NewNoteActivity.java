@@ -40,6 +40,7 @@ import liam.franco.selene.bus.Past;
 import liam.franco.selene.bus.Present;
 import liam.franco.selene.modules.Note;
 import liam.franco.selene.utils.AnimUtils;
+import liam.franco.selene.utils.ColorAnimationUtils;
 import liam.franco.selene.utils.PaletteUtils;
 import liam.franco.selene.utils.RandomUtils;
 
@@ -107,16 +108,28 @@ public class NewNoteActivity extends SuperNoteActivity {
         startRevealAnim.setInterpolator(AnimUtils.getFastOutSlowInInterpolator());
         startRevealAnim.addListener(new AnimatorListenerAdapter() {
             @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                parentLayout.setTag(R.id.new_note_animation_state, true);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                parentLayout.setTag(R.id.new_note_animation_state, false);
+                parentLayout.setBackgroundColor(Color.TRANSPARENT);
+                setUiElementsColor(currentPalette, 0);
+            }
+
+            @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                App.MAIN_THREAD.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        parentLayout.setBackgroundColor(Color.TRANSPARENT);
-                        setUiElementsColor(currentPalette);
-                        App.MAIN_THREAD.removeCallbacks(this);
-                    }
-                }, 100);
+
+                if ((boolean) parentLayout.getTag(R.id.new_note_animation_state)) {
+                    parentLayout.setTag(R.id.new_note_animation_state, false);
+                    parentLayout.setBackgroundColor(Color.TRANSPARENT);
+                    setUiElementsColor(currentPalette);
+                }
             }
         });
 
@@ -156,31 +169,43 @@ public class NewNoteActivity extends SuperNoteActivity {
 
     @Override
     public void onBackPressed() {
-        if (startRevealAnim != null && !startRevealAnim.isRunning()) {
-            tagsList.setVisibility(View.GONE);
-            tagsList.post(new Runnable() {
-                @Override
-                public void run() {
-                    int startRadius = Math.max(parentLayout.getWidth(), parentLayout.getHeight());
-                    int endRadius = 0;
-
-                    Animator animate = ViewAnimationUtils.createCircularReveal(parentLayout, fabX, fabY, startRadius, endRadius);
-                    animate.setDuration(750);
-                    animate.setInterpolator(AnimUtils.getFastOutSlowInInterpolator());
-                    animate.addListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            parentLayout.setVisibility(View.INVISIBLE);
-                            finish();
-                        }
-                    });
-                    parentLayout.setBackgroundColor(((ColorDrawable) getWindow().getDecorView().getBackground()).getColor());
-                    getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    animate.start();
-                }
-            });
+        if (startRevealAnim != null) {
+            if (startRevealAnim.isRunning()) {
+                startRevealAnim.cancel();
+            }
         }
+
+        // just to make sure we don't run some animations after-time
+        ColorAnimationUtils.cancelColorAnimation();
+        parentLayout.setBackgroundColor(currentPalette.getPrimary());
+
+        tagsList.setVisibility(View.GONE);
+        tagsList.post(new Runnable() {
+            @Override
+            public void run() {
+                int startRadius = Math.max(parentLayout.getWidth(), parentLayout.getHeight());
+                int endRadius = 0;
+
+                Animator animate = ViewAnimationUtils.createCircularReveal(parentLayout, fabX, fabY, startRadius, endRadius);
+                animate.setDuration(750);
+                animate.setInterpolator(AnimUtils.getFastOutSlowInInterpolator());
+                animate.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        parentLayout.setVisibility(View.INVISIBLE);
+                        finish();
+                    }
+                });
+                animate.start();
+            }
+        });
     }
 
     @Override

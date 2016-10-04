@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="gaia_id_key" type="id"/>
+    <item name="new_note_animation_state" type="id"/>
 </resources>

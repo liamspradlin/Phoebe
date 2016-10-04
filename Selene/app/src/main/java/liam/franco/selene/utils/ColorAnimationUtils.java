@@ -30,9 +30,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import liam.franco.selene.ui.ToolsBarImageView;
-
 public class ColorAnimationUtils {
+    private static ValueAnimator colorAnimator;
+
     /**
      * @param view View/Drawable you want to set a new color on
      * @param from Current View/Drawable color
@@ -46,8 +46,8 @@ public class ColorAnimationUtils {
         final int initialColor = from;
         final int finalColor = to;
 
-        ValueAnimator anim = ValueAnimator.ofFloat(0, 1);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        colorAnimator = ValueAnimator.ofFloat(0, 1);
+        colorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float position = animation.getAnimatedFraction();
@@ -78,10 +78,16 @@ public class ColorAnimationUtils {
             }
         });
 
-        anim.setDuration(duration).start();
+        colorAnimator.setDuration(duration).start();
     }
 
-    public static int blendColors(int from, int to, float ratio) {
+    public static void cancelColorAnimation() {
+        if (colorAnimator != null) {
+            colorAnimator.cancel();
+        }
+    }
+
+    private static int blendColors(int from, int to, float ratio) {
         final float inverseRatio = 1f - ratio;
 
         final float r = Color.red(to) * ratio + Color.red(from) * inverseRatio;
