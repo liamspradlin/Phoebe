@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.fastadapter.utils.ViewHolderFactory;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.BindView;
@@ -94,15 +95,15 @@ class NoteItem extends AbstractItem<NoteItem, NoteItem.ViewHolder> {
         public void setNote(Note note) {
             this.note = note;
             new Gaia.Builder()
-                    .setMutativeView(parentLayout)
+                    .setMutativeView(new WeakReference<Object>(parentLayout))
                     .setColorToScale(PaletteUtils.get().palettes.get(note.getPalette()).getPrimary())
                     .build();
             new Gaia.Builder()
-                    .setMutativeView(title)
+                    .setMutativeView(new WeakReference<Object>(title))
                     .setColorToScale(PaletteUtils.get().palettes.get(note.getPalette()).getTextColor())
                     .build();
             new Gaia.Builder()
-                    .setMutativeView(content)
+                    .setMutativeView(new WeakReference<Object>(content))
                     .setColorToScale(PaletteUtils.get().palettes.get(note.getPalette()).getTextColor())
                     .build();
         }

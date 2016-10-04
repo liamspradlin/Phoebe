@@ -39,6 +39,8 @@ import android.widget.TextView;
 
 import com.mikepenz.materialize.util.UIUtils;
 
+import java.lang.ref.WeakReference;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -109,7 +111,7 @@ public class MainActivity extends SuperAppCompatActivity {
         // mutate the FAB's colour!
         new Gaia.Builder()
                 .setName(GaiaUtils.FAB)
-                .setMutativeView(fab)
+                .setMutativeView(new WeakReference<Object>(fab))
                 .setColorToScale(fab.getBackgroundTintList().getDefaultColor())
                 .build();
     }

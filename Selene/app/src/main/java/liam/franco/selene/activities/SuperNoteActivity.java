@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.materialize.util.UIUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -201,17 +202,17 @@ public class SuperNoteActivity extends AppCompatActivity {
                 // 500ms and we don't wanna have issues
                 new Gaia.Builder()
                         .setName(GaiaUtils.NOTE_PARENT_LAYOUT)
-                        .setMutativeView(parentLayout)
+                        .setMutativeView(new WeakReference<Object>(parentLayout))
                         .setColorToScale(currentPalette.getPrimary())
                         .build();
                 new Gaia.Builder()
                         .setName(GaiaUtils.NOTE_TITLE)
-                        .setMutativeView(noteTitle)
+                        .setMutativeView(new WeakReference<Object>(noteTitle))
                         .setColorToScale(currentPalette.getTextColor())
                         .build();
                 new Gaia.Builder()
                         .setName(GaiaUtils.NOTE_CONTENT)
-                        .setMutativeView(noteContent)
+                        .setMutativeView(new WeakReference<Object>(noteContent))
                         .setColorToScale(currentPalette.getTextColor())
                         .build();
 

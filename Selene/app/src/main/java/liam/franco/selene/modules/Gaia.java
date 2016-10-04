@@ -24,6 +24,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
+
 import de.halfbit.tinybus.Subscribe;
 import liam.franco.selene.application.App;
 import liam.franco.selene.bus.AmbientLightSensorChange;
@@ -40,7 +42,7 @@ public class Gaia {
     // this field is important because it'll identify the object in the Gaia objects Array inside Application class
     private String name;
     // well the object that'll be mutated... duh!
-    private Object mutativeObject;
+    private WeakReference<Object> viewToMutate;
     // original view color
     @ColorInt
     private int colorToScale;
@@ -49,7 +51,7 @@ public class Gaia {
 
     private Gaia(Builder builder) {
         this.name = builder.getName();
-        this.mutativeObject = builder.getMutativeView();
+        this.viewToMutate = builder.getMutativeView();
         this.colorToScale = builder.getColorToScale();
         // tango down!
         GaiaUtils.seekAndDestroy(getName());
@@ -66,7 +68,7 @@ public class Gaia {
 
     public static class Builder {
         private String name;
-        private Object mutativeView;
+        private WeakReference<Object> mutativeView;
         @ColorInt
         private int defaultBgColor;
 
@@ -75,7 +77,7 @@ public class Gaia {
             return this;
         }
 
-        public Builder setMutativeView(Object mutativeView) {
+        public Builder setMutativeView(WeakReference<Object> mutativeView) {
             this.mutativeView = mutativeView;
             return this;
         }
@@ -85,11 +87,11 @@ public class Gaia {
             return this;
         }
 
-        public Object getMutativeView() {
+        WeakReference<Object> getMutativeView() {
             return mutativeView;
         }
 
-        public int getColorToScale() {
+        int getColorToScale() {
             return defaultBgColor;
         }
 
@@ -106,19 +108,20 @@ public class Gaia {
     public void onAmbientLightChange(AmbientLightSensorChange sensor) {
         // calculates the new color based on the sensor values and the original color
         // the algorithm is magical
-        final int newColor = Color.HSVToColor(GaiaUtils.computeHSV(sensor, mutativeObject, colorToScale));
+        final int newColor = Color.HSVToColor(GaiaUtils.computeHSV(sensor, viewToMutate, colorToScale));
         int currentColor = 0;
 
         // mutate all the things
-        if (mutativeObject != null) {
-            if (mutativeObject instanceof LinearLayout) {
-                currentColor = ((ColorDrawable) ((LinearLayout) mutativeObject).getBackground()).getColor();
-            } else if (mutativeObject instanceof TextView) {
-                currentColor = ((TextView) mutativeObject).getCurrentTextColor();
-            } else if (mutativeObject instanceof FloatingActionButton) {
-                currentColor = ((FloatingActionButton) mutativeObject).getBackgroundTintList().getDefaultColor();
-            } else if (mutativeObject instanceof FrameLayout) {
-                currentColor = ((ColorDrawable) ((FrameLayout) mutativeObject).getBackground()).getColor();
+        Object view = viewToMutate.get();
+        if (view != null) {
+            if (view instanceof LinearLayout) {
+                currentColor = ((ColorDrawable) ((LinearLayout) view).getBackground()).getColor();
+            } else if (view instanceof TextView) {
+                currentColor = ((TextView) view).getCurrentTextColor();
+            } else if (view instanceof FloatingActionButton) {
+                currentColor = ((FloatingActionButton) view).getBackgroundTintList().getDefaultColor();
+            } else if (view instanceof FrameLayout) {
+                currentColor = ((ColorDrawable) ((FrameLayout) view).getBackground()).getColor();
             }
         }
 
@@ -132,7 +135,7 @@ public class Gaia {
                 @Override
                 public void run() {
                     // much animation. wow material. such beauty. so rad
-                    ColorAnimationUtils.animateColor(mutativeObject, finalCurrentColor, newColor, 250);
+                    ColorAnimationUtils.animateColor(viewToMutate, finalCurrentColor, newColor, 250);
                 }
             });
         }
