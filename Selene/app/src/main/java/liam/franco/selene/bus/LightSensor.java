@@ -16,10 +16,10 @@
 
 package liam.franco.selene.bus;
 
-public class AmbientLightSensorChange {
+public class LightSensor {
     public float light;
 
-    public AmbientLightSensorChange(float value) {
+    public LightSensor(float value) {
         this.light = value;
     }
 

@@ -23,7 +23,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import liam.franco.selene.application.App;
-import liam.franco.selene.bus.AmbientLightSensorChange;
+import liam.franco.selene.bus.LightSensor;
 import liam.franco.selene.bus.StartAmbientLightSensor;
 import liam.franco.selene.bus.StopAmbientLightSensor;
 
@@ -39,7 +39,7 @@ public class AmbientLight implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        App.BUS.post(new AmbientLightSensorChange(event.values[0]));
+        App.BUS.post(new LightSensor(event.values[0]));
     }
 
     @Override

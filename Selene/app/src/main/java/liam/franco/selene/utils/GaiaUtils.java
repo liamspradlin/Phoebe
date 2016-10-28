@@ -23,7 +23,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import liam.franco.selene.application.App;
-import liam.franco.selene.bus.AmbientLightSensorChange;
+import liam.franco.selene.bus.LightSensor;
 import liam.franco.selene.modules.Gaia;
 
 public class GaiaUtils {
@@ -40,7 +40,7 @@ public class GaiaUtils {
     public final static float LOW_THRESHOLD = 0.05f;
     public final static float MIN = 0.0f;
 
-    public static boolean ready(long lastUpdate) {
+    public static boolean isReady(long lastUpdate) {
         return System.currentTimeMillis() > (lastUpdate + MIN_UPDATE_INTERVAL_MS);
     }
 
@@ -61,16 +61,16 @@ public class GaiaUtils {
     /**
      *
      * @param sensor object coming from our bus containing the Ambient Light sensor value
-     * @param mutativeObject the object that'll be mutated
-     * @param colorToScale the current color of the mutative object
+     * @param objectToMutate the object that'll be mutated
+     * @param originalColor the original color of the object that'll be mutated
      *
      * @return a new HSV value to be applied into the object
      */
-    public static float[] computeHSV(AmbientLightSensorChange sensor, Object mutativeObject, int colorToScale) {
+    public static float[] computeHSV(LightSensor sensor, Object objectToMutate, int originalColor) {
         // we divide the color into red green and blue
-        int red = Color.red(colorToScale);
-        int green = Color.green(colorToScale);
-        int blue = Color.blue(colorToScale);
+        int red = Color.red(originalColor);
+        int green = Color.green(originalColor);
+        int blue = Color.blue(originalColor);
 
         final float hsv[] = new float[3];
 
@@ -88,7 +88,7 @@ public class GaiaUtils {
 
         // Text is, by rule, in a contrasted color to the background, so we have to apply the formula backwards to the
         // rest of the views
-        if (mutativeObject instanceof TextView) {
+        if (objectToMutate instanceof TextView) {
             hsv[2] += div;
         } else {
             hsv[2] -= div;

@@ -28,7 +28,7 @@ import java.lang.ref.WeakReference;
 
 import de.halfbit.tinybus.Subscribe;
 import liam.franco.selene.application.App;
-import liam.franco.selene.bus.AmbientLightSensorChange;
+import liam.franco.selene.bus.LightSensor;
 import liam.franco.selene.utils.ColorAnimationUtils;
 import liam.franco.selene.utils.GaiaUtils;
 
@@ -39,20 +39,22 @@ import liam.franco.selene.utils.GaiaUtils;
 // the views (or any other object you want to mutate). Gaia is omnipotent, it's a God, it can exist as many times
 // as the developer wants, at any point in time
 public class Gaia {
+    private static final int COLOR_TRANSFORM_DURATION = 250;
+
     // this field is important because it'll identify the object in the Gaia objects Array inside Application class
     private String name;
     // well the object that'll be mutated... duh!
-    private WeakReference<Object> viewToMutate;
+    private WeakReference<Object> objectToMutate;
     // original view color
     @ColorInt
-    private int colorToScale;
+    private int originalColor;
     // stores the last time, in ms, the object mutated
     private long lastUpdate;
 
     private Gaia(Builder builder) {
         this.name = builder.getName();
-        this.viewToMutate = builder.getMutativeView();
-        this.colorToScale = builder.getColorToScale();
+        this.objectToMutate = builder.getMutativeView();
+        this.originalColor = builder.getColorToScale();
         // tango down!
         GaiaUtils.seekAndDestroy(getName());
         // good morning!!
@@ -105,14 +107,14 @@ public class Gaia {
     }
 
     @Subscribe(mode = Subscribe.Mode.Background)
-    public void onAmbientLightChange(AmbientLightSensorChange sensor) {
+    public void onUpdatedAmbientLight(LightSensor sensor) {
         // calculates the new color based on the sensor values and the original color
         // the algorithm is magical
-        final int newColor = Color.HSVToColor(GaiaUtils.computeHSV(sensor, viewToMutate, colorToScale));
+        final int newColor = Color.HSVToColor(GaiaUtils.computeHSV(sensor, objectToMutate, originalColor));
         int currentColor = 0;
 
         // mutate all the things
-        Object view = viewToMutate.get();
+        Object view = objectToMutate.get();
         if (view != null) {
             if (view instanceof LinearLayout) {
                 currentColor = ((ColorDrawable) ((LinearLayout) view).getBackground()).getColor();
@@ -125,9 +127,12 @@ public class Gaia {
             }
         }
 
+        boolean hasNewColor = currentColor != newColor;
+        boolean isReady = GaiaUtils.isReady(lastUpdate);
+
         // we don't want to update the colors every time the sensor outputs new values. Yes, the sensor is very nervous
-        if (currentColor != newColor && GaiaUtils.ready(lastUpdate)) {
-            final int finalCurrentColor = currentColor;
+        if (hasNewColor && isReady) {
+            final int fromColor = currentColor;
             lastUpdate = System.currentTimeMillis();
 
             // run this on the Main Thread, this @Subscribe method runs in a background thread
@@ -135,7 +140,10 @@ public class Gaia {
                 @Override
                 public void run() {
                     // much animation. wow material. such beauty. so rad
-                    ColorAnimationUtils.animateColor(viewToMutate, finalCurrentColor, newColor, 250);
+                    // pass it the object (in this case it's a view) that's going to be mutated,
+                    // the starting color value, and the color we want to animate to
+                    // lastly the duration of the animation, in this case the default should be 250ms
+                    ColorAnimationUtils.animateColor(objectToMutate, fromColor, newColor, COLOR_TRANSFORM_DURATION);
                 }
             });
         }
