@@ -3,17 +3,17 @@ apply plugin: 'hugo'
 apply plugin: 'realm-android'
 
 ext {
-    SUPPORT_LIB = "24.2.1"
+    SUPPORT_LIB = "25.0.0"
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "liam.franco.selene"
         minSdkVersion 21
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode getVersionCodeTimestamp()
         versionName "1.0b"
         archivesBaseName = "Selene-${android.defaultConfig.versionName}"
@@ -82,7 +82,7 @@ dependencies {
     compile('com.mikepenz:materialize:1.0.0@aar') {
         transitive = true
     }
-    compile('com.mikepenz:fastadapter:1.8.2@aar') {
+    compile('com.mikepenz:fastadapter:2.0.0@aar') {
         transitive = true
     }
 
